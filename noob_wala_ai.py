@@ -86,17 +86,18 @@ if __name__=='__main__':
         elif 'open spotify' in statement or 'spotify' in statement:
             webbrowser.open_new_tab("https://open.spotify.com/")
             speak("opening spotify in browser")
-        elif 'bf1' in statement:
-            speak("you would need to turn on the vpn first... dumbass")
-            from os import startfile
-            startfile("C:\\Users\\Public\\Desktop\\ProtonVPN.lnk")
-            time.sleep(15)
-            speak("Are you done turing on the VPN?... ?" )
-            speak("Let's play some battlefield 1... ")
-            from os import startfile
-            startfile("C:\\Users\\abhin\\Desktop\\Battlefield 1.lnk")
-            speak("Here we go...")
-            break
+#         elif 'bf1' in statement:
+#             speak("you would need to turn on the vpn first... dumbass")
+#             from os import startfile
+#             startfile("")
+#             time.sleep(15)
+#             speak("Are you done turing on the VPN?... ?" )
+#             speak("Let's play some battlefield 1... ")
+# SORRY THIS PART IS FOR MYSELF :)
+#             from os import startfile
+#             startfile(path)
+#             speak("Here we go...")
+#             break
         speak("you want anything else...?")
             
 
