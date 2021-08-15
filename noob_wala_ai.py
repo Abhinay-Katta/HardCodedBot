@@ -32,7 +32,7 @@ def wishMe():
         print("^    ^")
         print(" \__/ ")
     from os import startfile
-    startfile("D:\VS Code\Python\__pycache__\giphy.gif")
+    startfile("(path to )giphy.gif")
 def takeCommand():
     r=sr.Recognizer()
     with sr.Microphone() as source:
@@ -68,11 +68,11 @@ if __name__=='__main__':
             speak("opening youtube")
             time.sleep(3)
         elif 'open gmail' in statement or 'gmail' in statement:
-            webbrowser.open_new_tab("https://mail.google.com/mail/u/0/#inbox")
+            webbrowser.open_new_tab("https://mail.google.com/")
             speak("opening g mail")
             time.sleep(3)
         elif 'open kaggle' in statement or 'kaggle' in statement:
-            webbrowser.open_new_tab("https://www.kaggle.com/colinmorris/booleans-and-conditionals")
+            webbrowser.open_new_tab("https://www.kaggle.com/")
             speak("opening kaggle")
         elif 'time' in statement or 'whats the time?' in statement:
             strTime=datetime.datetime.now().strftime("%H:%M")
