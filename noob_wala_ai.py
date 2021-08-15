@@ -59,7 +59,7 @@ if __name__=='__main__':
         statement=takeCommand().lower()
         if statement==0:
             continue
-        if "bye" in statement or "fuck off" in statement or "stop" in statement:
+        if "bye" in statement or "stop" in statement:
             speak('ok your personal assistant is shutting down')
             print('ok your personal assistant is shutting down')
             break
@@ -83,6 +83,7 @@ if __name__=='__main__':
         elif 'log off' in statement or 'sign out' in statement:
             speak("Ok signing off your pc, Have a good day....")
             subprocess.call(["shutdown","/l"])
+            break
         elif 'open spotify' in statement or 'spotify' in statement:
             webbrowser.open_new_tab("https://open.spotify.com/")
             speak("opening spotify in browser")
