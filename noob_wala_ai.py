@@ -17,7 +17,7 @@ def speak(text):
     engine.runAndWait()
 
 
-def wishMe():
+def wish_me():
     hour=datetime.datetime.now().hour
     if hour>=0 and hour<12:
         speak("Hello, Good Morning")
@@ -33,7 +33,7 @@ def wishMe():
         print(" \__/ ")
     from os import startfile
     startfile("(path to )giphy.gif")
-def takeCommand():
+def take_command():
     r=sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening...")
@@ -50,13 +50,13 @@ def takeCommand():
 
 print("Loading your assistant ")
 speak("Loading your assistant ")
-wishMe()
+wish_me()
 
 
 if __name__=='__main__':
     speak("Tell me, How can I help you... ?")
     while True:
-        statement=takeCommand().lower()
+        statement=take_command().lower()
         if statement==0:
             continue
         if "bye" in statement or "stop" in statement:
