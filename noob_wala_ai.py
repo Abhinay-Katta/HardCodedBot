@@ -1,12 +1,9 @@
-from audioop import tomono
 import speech_recognition as sr
 import pyttsx3
 import webbrowser
-import os
 import time 
 import datetime 
 import subprocess
-
 
 engine =pyttsx3.init('sapi5') 
 #sapi5 is a microsoft text to speech converter for voice recognition
@@ -15,7 +12,6 @@ engine.setProperty('voice', 'voices[0].id')
 def speak(text):
     engine.say(text)
     engine.runAndWait()
-
 
 def wish_me():
     hour=datetime.datetime.now().hour
@@ -31,8 +27,6 @@ def wish_me():
         speak("Hello, Good Evening")
         print("^    ^")
         print(" \__/ ")
-    from os import startfile
-    startfile("(path to )giphy.gif")
 def take_command():
     r=sr.Recognizer()
     with sr.Microphone() as source:
@@ -51,7 +45,6 @@ def take_command():
 print("Loading your assistant ")
 speak("Loading your assistant ")
 wish_me()
-
 
 if __name__=='__main__':
     speak("Tell me, How can I help you... ?")
@@ -101,5 +94,4 @@ if __name__=='__main__':
 #             break
         speak("you want anything else...?")
             
-
 time.sleep(3)
