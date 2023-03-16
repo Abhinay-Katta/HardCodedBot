@@ -54,44 +54,52 @@ def take_command():
         return statement
 
 
-print("Loading your assistant ")
+def logging_off_with_outro():
+    for i in range(6):
+        print(f"Destroying System32 in {6-i}\n")
+        time.sleep(1)
+
+
 speak("Loading your assistant ")
+print("Loading your assistant ")
 wish_me()
 # driver code
+
 if __name__ == '__main__':
     speak("Tell me, How can I help you... ?")
+    strTime = datetime.datetime.now().strftime("%H:%M")
+    ins = {
+        "time": [lambda:print(strTime), lambda:speak(f"the time is {strTime}")],
+        "bye": [lambda:speak('ok your personal assistant is shutting down'), lambda: print('ok your personal assistant is shutting down')],
+        "stop": [lambda:speak('ok your personal assistant is shutting down'), lambda: print('ok your personal assistant is shutting down')],
+        "open youtube": [lambda:webbrowser.open_new_tab("https://www.youtube.com/"), lambda: speak("opening youtube"), lambda:time.sleep(3)],
+        "youtube": [lambda:webbrowser.open_new_tab("https://www.youtube.com/"), lambda:speak("opening youtube"), lambda: time.sleep(3)],
+        "open gmail": [lambda:webbrowser.open_new_tab("https://mail.google.com/"), lambda: speak("opening g mail"), lambda: time.sleep(3)],
+        "gmail": [lambda:webbrowser.open_new_tab("https://mail.google.com/"), lambda: speak("opening g mail"), lambda: time.sleep(3)],
+        "what can you do": [lambda:speak("I am a noob A I . I am programmed to perform simplest shitty tasks such as opening youtube or opening g mail and telling you the time. Thats all i can do for now, but ill be upgraded later in the future, which is pretty doubtfull, to be honest."),
+                            lambda:speak("I was built by a dude named Abhi, further details about my guy here are confidential for no reason ")],
+        "who are you": [lambda:speak("I am a noob A I . I am programmed to perform simplest shitty tasks such as opening youtube or opening g mail and telling you the time. Thats all i can do for now, but ill be upgraded later in the future, which is pretty doubtfull, to be honest."),
+                        lambda:speak("I was built by a dude named Abhi, further details about my guy here are confidential for no reason ")],
+        "log off": [lambda:speak("Ok signing off your pc, Have a good day...."), lambda:logging_off_with_outro(),
+                    lambda:subprocess.call(["shutdown", "/l"])],
+        "spotify": [lambda:webbrowser.open_new_tab("https://open.spotify.com/"), lambda:speak("opening spotify in browser")],
+        "open spotify": [lambda:webbrowser.open_new_tab("https://open.spotify.com/"), lambda: speak("opening spotify in browser")]
+    }
     while True:
-        statement = take_command().lower()
-        if statement == 0:
-            continue
-        if "bye" in statement or "stop" in statement:
-            speak('ok your personal assistant is shutting down')
-            print('ok your personal assistant is shutting down')
-            break
-        elif 'open youtube' in statement or 'youtube' in statement:
-            webbrowser.open_new_tab("https://www.youtube.com/")
-            speak("opening youtube")
-            time.sleep(3)
-        elif 'open gmail' in statement or 'gmail' in statement:
-            webbrowser.open_new_tab("https://mail.google.com/")
-            speak("opening g mail")
-            time.sleep(3)
-        elif 'open kaggle' in statement or 'kaggle' in statement:
-            webbrowser.open_new_tab("https://www.kaggle.com/")
-            speak("opening kaggle")
-        elif 'time' in statement or 'whats the time?' in statement:
-            strTime = datetime.datetime.now().strftime("%H:%M")
-            speak(f"the time is {strTime}")
-        elif 'who are you' in statement or 'what can you do' in statement:
-            speak("I am a noob A I . I am programmed to perform simplest shitty tasks such as opening youtube or opening g mail and telling you the time. Thats all i can do for now, but ill be upgraded later in the future, which is pretty doubtfull, to be honest.")
-            speak("I was built by a dude named Abhi, further details about my guy here are confidential for no reason ")
-        elif 'log off' in statement or 'sign out' in statement:
-            speak("Ok signing off your pc, Have a good day....")
-            subprocess.call(["shutdown", "/l"])
-            break
-        elif 'open spotify' in statement or 'spotify' in statement:
-            webbrowser.open_new_tab("https://open.spotify.com/")
-            speak("opening spotify in browser")
-        speak("you want anything else...?")
+        try:
+            statement = take_command()
+            print(statement[1])
+
+            if statement == 0:
+                continue
+
+            for key in ins.keys():
+                if key in statement:
+                    for func in ins[key]:
+                        func()
+        except:
+            # statement = input("How can I help you?:\n")
+            # print(type(statement))
+            statement = take_command()
 
 time.sleep(3)
