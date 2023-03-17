@@ -50,7 +50,7 @@ def take_command():
 
         except Exception:
             speak("Pardon me, please say that again")
-            return None
+            statement = r.recognize_google(audio, language='en-in')
         return statement
 
 
@@ -64,6 +64,30 @@ speak("Loading your assistant ")
 print("Loading your assistant ")
 wish_me()
 # driver code
+'''
+Overall, the code seems well-written and it achieves the desired functionality of a basic voice assistant. 
+However, there are a few areas where the code could be improved:
+
+Instead of using a dictionary to store the commands and their corresponding functions, it would be better 
+to use a class to encapsulate the functionality. This would make the code more organized and easier to understand and modify.
+
+The code could be made more robust by handling exceptions and errors more gracefully. For example, if the 
+speech recognition fails to recognize the user's command, the program should handle this error and prompt
+the user to repeat their command instead of simply returning None.
+
+The program could be made more efficient by using multi-threading or multiprocessing to execute multiple 
+functions simultaneously, instead of executing them sequentially.
+
+The program could be made more user-friendly by providing more feedback to the user, such as a visual 
+indication that the program is listening for commands or confirmation messages when commands are executed.
+
+Overall, the code is a good starting point for a basic voice assistant, but there is definitely room for improvement.
+
+
+
+
+
+'''
 
 if __name__ == '__main__':
     speak("Tell me, How can I help you... ?")
@@ -82,14 +106,13 @@ if __name__ == '__main__':
                         lambda:speak("I was built by a dude named Abhi, further details about my guy here are confidential for no reason ")],
         "log off": [lambda:speak("Ok signing off your pc, Have a good day...."), lambda:logging_off_with_outro(),
                     lambda:subprocess.call(["shutdown", "/l"])],
+
         "spotify": [lambda:webbrowser.open_new_tab("https://open.spotify.com/"), lambda:speak("opening spotify in browser")],
         "open spotify": [lambda:webbrowser.open_new_tab("https://open.spotify.com/"), lambda: speak("opening spotify in browser")]
     }
     while True:
         try:
             statement = take_command()
-<<<<<<< HEAD
-            print(statement[1])
 
             if statement == 0:
                 continue
@@ -103,41 +126,4 @@ if __name__ == '__main__':
             # print(type(statement))
             statement = take_command()
 
-=======
-            if statement == 0:
-                statement = input("What do you want?:\n")
-                continue
-            if "bye" in statement or "stop" in statement:
-                speak('ok your personal assistant is shutting down')
-                print('ok your personal assistant is shutting down')
-                break
-            elif 'open youtube' in statement or 'youtube' in statement:
-                webbrowser.open_new_tab("https://www.youtube.com/")
-                speak("opening youtube")
-                time.sleep(3)
-            elif 'open gmail' in statement or 'gmail' in statement:
-                webbrowser.open_new_tab("https://mail.google.com/")
-                speak("opening g mail")
-                time.sleep(3)
-            elif 'open kaggle' in statement or 'kaggle' in statement:
-                webbrowser.open_new_tab("https://www.kaggle.com/")
-                speak("opening kaggle")
-            elif 'time' in statement or 'whats the time?' in statement:
-                strTime = datetime.datetime.now().strftime("%H:%M")
-                speak(f"the time is {strTime}")
-            elif 'who are you' in statement or 'what can you do' in statement:
-                speak("I am a noob A I . I am programmed to perform simplest shitty tasks such as opening youtube or opening g mail and telling you the time. Thats all i can do for now, but ill be upgraded later in the future, which is pretty doubtfull, to be honest.")
-                speak(
-                    "I was built by a dude named Abhi, further details about my guy here are confidential for no reason ")
-            elif 'log off' in statement or 'sign out' in statement:
-                speak("Ok signing off your pc, Have a good day....")
-                subprocess.call(["shutdown", "/l"])
-                break
-            elif 'open spotify' in statement or 'spotify' in statement:
-                webbrowser.open_new_tab("https://open.spotify.com/")
-                speak("opening spotify in browser")
-            speak("you want anything else...?")
-        except:
-            statement = take_command()
->>>>>>> aca56ddc5e137fcc99ee472682f6e61ae435cbe6
 time.sleep(3)
