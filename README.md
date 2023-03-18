@@ -10,4 +10,4 @@
 3. Execute the bot by running the command `noobBot`
 
 
-### Made using PyQt6
+### Made using PyQt6 and app compiled with Pyinstaller
