@@ -64,30 +64,6 @@ speak("Loading your assistant ")
 print("Loading your assistant ")
 wish_me()
 # driver code
-'''
-Overall, the code seems well-written and it achieves the desired functionality of a basic voice assistant. 
-However, there are a few areas where the code could be improved:
-
-Instead of using a dictionary to store the commands and their corresponding functions, it would be better 
-to use a class to encapsulate the functionality. This would make the code more organized and easier to understand and modify.
-
-The code could be made more robust by handling exceptions and errors more gracefully. For example, if the 
-speech recognition fails to recognize the user's command, the program should handle this error and prompt
-the user to repeat their command instead of simply returning None.
-
-The program could be made more efficient by using multi-threading or multiprocessing to execute multiple 
-functions simultaneously, instead of executing them sequentially.
-
-The program could be made more user-friendly by providing more feedback to the user, such as a visual 
-indication that the program is listening for commands or confirmation messages when commands are executed.
-
-Overall, the code is a good starting point for a basic voice assistant, but there is definitely room for improvement.
-
-
-
-
-
-'''
 
 if __name__ == '__main__':
     speak("Tell me, How can I help you... ?")
@@ -127,3 +103,23 @@ if __name__ == '__main__':
             statement = take_command()
 
 time.sleep(3)
+
+'''
+Overall, the code seems well-written and it achieves the desired functionality of a basic voice assistant. 
+However, there are a few areas where the code could be improved:
+
+Instead of using a dictionary to store the commands and their corresponding functions, it would be better 
+to use a class to encapsulate the functionality. This would make the code more organized and easier to understand and modify.
+
+The code could be made more robust by handling exceptions and errors more gracefully. For example, if the 
+speech recognition fails to recognize the user's command, the program should handle this error and prompt
+the user to repeat their command instead of simply returning None.
+
+The program could be made more efficient by using multi-threading or multiprocessing to execute multiple 
+functions simultaneously, instead of executing them sequentially.
+
+The program could be made more user-friendly by providing more feedback to the user, such as a visual 
+indication that the program is listening for commands or confirmation messages when commands are executed.
+
+Overall, the code is a good starting point for a basic voice assistant, but there is definitely room for improvement.
+'''

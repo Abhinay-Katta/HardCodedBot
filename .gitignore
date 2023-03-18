@@ -1,3 +1,5 @@
 Test/dict.py
-app
-app.py
+Test/class_test.py
+__pycache__
+app/__init__.py
+__init__.py
