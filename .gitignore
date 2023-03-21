@@ -1,6 +1,6 @@
 Test/dict.py
 Test/class_test.py
-*__pycache__*
+*/__pycache__*
 app/__init__.py
 __init__.py
 *.ipynb
