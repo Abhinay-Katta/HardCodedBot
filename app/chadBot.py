@@ -13,11 +13,11 @@ class chad_noob_bot:
         self.voices = self.engine.getProperty('voices')
         self.engine.setProperty('voice', self.voices[0].id)
         self.commands = {
-            "time": self.__get_time(),
-            "youtube": self.__open_youtube(),
-            "gmail": self.__open_gmail(),
-            "shut down": self.__shutting_off_with_outro(),
-            "who are you": self.__self_describe(),
+            "time": lambda: self.__get_time(),
+            "youtube": lambda: self.__open_youtube(),
+            "gmail": lambda: self.__open_gmail(),
+            "shut down": lambda: self.__shutting_off_with_outro(),
+            "who are you": lambda: self.__self_describe(),
 
         }
 
@@ -26,7 +26,7 @@ class chad_noob_bot:
         self.engine.runAndWait()
 
     def wish_me(self):
-        self.hour = datetime.datetime.now().hour
+        self.hour = self.time
         if self.hour >= 0 and self.hour < 12:
             self.speak("Hello, Good Morning")
             # add morning gif here
@@ -53,8 +53,7 @@ class chad_noob_bot:
         return statement
 
     def __get_time(self):
-        self.time = datetime.datetime().now().strftime("%H : %M")
-        return self.time
+        return datetime.datetime(year=2023, month=3, day=20).now().hour
 
     def __shutting_off_with_outro(self) -> None:
         for i in range(5):
@@ -63,7 +62,7 @@ class chad_noob_bot:
         self.speak('ok your personal assistant is shutting down')
         self.text = 'ok your personal assistant is shutting down'
 
-        subprocess.call(["shutdown", "\l"])
+        subprocess.call(["shutdown", "/s"])
 
     def __open_youtube(self):
         webbrowser.open_new_tab("https://www.youtube.com/")
