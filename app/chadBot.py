@@ -53,7 +53,7 @@ class chad_noob_bot:
         return statement
 
     def __get_time(self):
-        return datetime.datetime(year=2023, month=3, day=20).now().hour
+        return datetime.datetime().now().hour
 
     def __shutting_off_with_outro(self) -> None:
         for i in range(5):

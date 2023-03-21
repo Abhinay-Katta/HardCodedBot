@@ -17,32 +17,39 @@ class App(QWidget):
         bot = chad_noob_bot()
 
         # Set window properties
-        self.setWindowTitle('noobBot')
+        self.window_title = 'noobBot'
+        self.setWindowTitle(self.window_title)
         self.setWindowIcon(QIcon('../src/noobBot_window_icon.png'))
         self.set_taskbar_icon('../src/noobBot_window_icon.png')
-        self.setMinimumSize(340, 300)
-        self.setMaximumSize(360, 320)
+        self.setMinimumSize(380, 360)
+        self.setMaximumSize(380, 360)
+
+        # gif style properties
         self.gif_label = QLabel(self)
         self.gif_label.setAlignment(QtCore.Qt.AlignmentFlag(5))
-        # Create a button to trigger the animation
-        self.button = QPushButton('Speak', self)
-        self.button.setFont(QFont('Berlin Sans FB', 13))
-        self.button.clicked.connect(self.play_gif)
 
-        # self.button.clicked.connect(bot.take_command)
+        # Start button for listening gif
+        self.start_gif_button = QPushButton('Speak', self)
+        self.start_gif_button.setFont(QFont('Montserrat', 10))
+        self.start_gif_button.clicked.connect(self.play_gif)
+
+        # Stop button for listening gif
+        self.stop_gif_button = QPushButton('Stop', self)
+        self.stop_gif_button.clicked.connect(self.stop_gif)
+        self.stop_gif_button.setFont(QFont('Montserrat', 10))
+
         # print console output
         self.console_output_text = QLabel(self)
         self.console_output_text.setText("console output text")
-        self.console_output_text.setAlignment(QtCore.Qt.AlignmentFlag(10))
-        # # self.console_output_text_button
 
-        # # print Statement
+        # print Statement
         self.statement_text = QLabel(self)
         self.statement_text.setText("statement text")
 
         # Create a vertical layout and add the button and label to it
         layout = QVBoxLayout(self)
-        layout.addWidget(self.button)
+        layout.addWidget(self.start_gif_button)
+        layout.addWidget(self.stop_gif_button)
         layout.addWidget(self.gif_label)
         layout.addWidget(self.statement_text)
         layout.addWidget(self.console_output_text)
@@ -70,14 +77,17 @@ class App(QWidget):
 
     def play_gif(self):
         # Load the GIF animation from file
-        self.button.setText("Listening")
-        gif = QMovie('D:\Projects\python\HardCodedBot\src\giphy.gif')
-
-        gif.setSpeed(100)
-
+        self.start_gif_button.setText("Listening")
+        self.gif = QMovie('../src/giphy.gif')
+        self.gif.setSpeed(100)
         # Set the GIF animation to the label and start playing
-        self.gif_label.setMovie(gif)
-        gif.start()
+        self.gif_label.setMovie(self.gif)
+        self.gif.start()
+
+    def stop_gif(self):
+        self.gif.stop()
+        self.start_gif_button.setText("Speak")
+        self.gif_label.clear()
 
     def closeEvent(self, event):
         # Clean up the GIF animation when closing the app
