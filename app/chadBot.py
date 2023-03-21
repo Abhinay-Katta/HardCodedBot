@@ -24,7 +24,7 @@ class chad_noob_bot:
 
         }
 
-    def speak(self, text) -> None:
+    def speak(self, text):
         def __say(text):
             self.engine.say(text)
             self.engine.runAndWait()
@@ -32,35 +32,41 @@ class chad_noob_bot:
         speak_thread.start()
 
     def wish_me(self):
-        self.hour = self.time
-        if self.hour >= 0 and self.hour < 12:
+        hour = datetime.datetime.now().hour
+        self.return_wish = ''
+        if hour >= 0 and hour < 12:
             self.speak("Hello, Good Morning")
+            self.return_wish = "Hello, Good Morning"
             # add morning gif here
-        elif self.hour >= 12 and self.hour < 18:
+        elif hour >= 12 and hour < 18:
             self.speak("Hello, Good Afternoon")
+            self.return_wish = "Hello, Good Afternoon"
+
             # add afternoon gif here
         else:
             self.speak("Hello, Good Evening")
-            # add evening gif here
+            self.return_wish = "Hello, Good Evening"
+        return self.return_wish
+        # add evening gif here
 
     def take_command(self) -> str:
         r = sr.Recognizer()
-        with sr.Microphone() as source:
-            print("Listening...")
-            audio = r.listen(source)
-        try:
-            statement = r.recognize_google(audio, language='en-in')
-            self.speak(
-                "Yes, the bot seems to be working... Its in the try block of take command now ")
-            print(f"You said:{statement}\n")
-        except:
-            self.speak("Pardon me, can you say that again?...\n")
-            self.speak("except block")
-            statement = r.recognize_google(audio, language='en-in')
-        return statement
+        statement = ''
+        while (statement == None):
+            try:
+                with sr.Microphone() as source:
+                    audio = r.listen(source)
+                statement = r.recognize_google(audio, language='en-in')
+                self.speak(
+                    "Yes, the bot seems to be working... Its in the try block of take command now ")
+                print(f"You said:{statement}\n")
+            except:
+                self.speak("Pardon me, can you say that again?...\n")
+            if (statement != None):
+                return statement
 
     def __get_time(self):
-        return datetime.datetime().now().hour
+        return datetime.datetime().now().strftime("%H : %M")
 
     def __shutting_off_with_outro(self) -> None:
         for i in range(5):
