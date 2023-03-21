@@ -1,9 +1,6 @@
 from chadBot import chad_noob_bot
-from PyQt6 import QtCore
-
 from PyQt6.QtCore import Qt
-
-from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QLabel, QVBoxLayout
+from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QVBoxLayout
 from PyQt6.QtGui import QMovie, QIcon, QPixmap, QFont
 import sys
 sys.path.append('../')
@@ -26,7 +23,7 @@ class App(QWidget):
 
         # gif style properties
         self.gif_label = QLabel(self)
-        self.gif_label.setAlignment(QtCore.Qt.AlignmentFlag(5))
+        self.gif_label.setAlignment(Qt.AlignmentFlag(5))
 
         # Start button for listening gif
         self.start_gif_button = QPushButton('Speak', self)
