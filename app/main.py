@@ -3,6 +3,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QVBoxLayout
 from PyQt6.QtGui import QMovie, QIcon, QPixmap, QFont
 import sys
+import threading
 sys.path.append('../')
 sys.path.append('./')
 
@@ -11,7 +12,7 @@ class App(QWidget):
 
     def __init__(self):
         super().__init__()
-        bot = chad_noob_bot()
+        self.bot = chad_noob_bot()
 
         # Set window properties
         self.window_title = 'noobBot'
@@ -29,6 +30,7 @@ class App(QWidget):
         self.start_gif_button = QPushButton('Speak', self)
         self.start_gif_button.setFont(QFont('Montserrat', 10))
         self.start_gif_button.clicked.connect(self.play_gif)
+        self.start_gif_button.clicked.connect(self.bot.take_command)
 
         # Stop button for listening gif
         self.stop_gif_button = QPushButton('Stop', self)
@@ -73,13 +75,17 @@ class App(QWidget):
         # Create a label to display the GIF animation
 
     def play_gif(self):
-        # Load the GIF animation from file
+
         self.start_gif_button.setText("Listening")
         self.gif = QMovie('../src/giphy.gif')
         self.gif.setSpeed(100)
+
         # Set the GIF animation to the label and start playing
         self.gif_label.setMovie(self.gif)
-        self.gif.start()
+        play_gif = threading.Thread(target=self.gif.start())
+        play_gif.start()
+        take_command_thread = threading.Thread(target=self.bot.take_command)
+        take_command_thread.start()
 
     def stop_gif(self):
         self.gif.stop()

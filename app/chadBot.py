@@ -1,17 +1,20 @@
 import speech_recognition as sr
 import pyttsx3
+import pyttsx3.engine
 import webbrowser
 import time
 import datetime
 import subprocess
 import sys
+import threading
 
 
 class chad_noob_bot:
     def __init__(self) -> None:
         self.engine = pyttsx3.init('sapi5')
         self.voices = self.engine.getProperty('voices')
-        self.engine.setProperty('voice', self.voices[0].id)
+        # self.engine.setProperty('voice', self.voices[0].id)
+        self.engine.setProperty('rate', 150)
         self.commands = {
             "time": lambda: self.__get_time(),
             "youtube": lambda: self.__open_youtube(),
@@ -22,8 +25,11 @@ class chad_noob_bot:
         }
 
     def speak(self, text) -> None:
-        self.engine.say(text)
-        self.engine.runAndWait()
+        def __say(text):
+            self.engine.say(text)
+            self.engine.runAndWait()
+        speak_thread = threading.Thread(target=__say, args=(text,))
+        speak_thread.start()
 
     def wish_me(self):
         self.hour = self.time
@@ -40,15 +46,16 @@ class chad_noob_bot:
     def take_command(self) -> str:
         r = sr.Recognizer()
         with sr.Microphone() as source:
-            # add listening gif here
-
             print("Listening...")
             audio = r.listen(source)
         try:
             statement = r.recognize_google(audio, language='en-in')
+            self.speak(
+                "Yes, the bot seems to be working... Its in the try block of take command now ")
             print(f"You said:{statement}\n")
         except:
             self.speak("Pardon me, can you say that again?...\n")
+            self.speak("except block")
             statement = r.recognize_google(audio, language='en-in')
         return statement
 
