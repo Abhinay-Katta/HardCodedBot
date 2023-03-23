@@ -16,8 +16,8 @@ class App(QWidget):
         # Set window properties
         self.window_title = 'noobBot'
         self.setWindowTitle(self.window_title)
-        self.setWindowIcon(QIcon('../src/noobBot_window_icon.png'))
-        self.set_taskbar_icon('../src/noobBot_window_icon.png')
+        self.setWindowIcon(QIcon('../assets/noobBot_window_icon.png'))
+        self.set_taskbar_icon('../assets/noobBot_window_icon.png')
         self.setMinimumSize(380, 360)
         self.setMaximumSize(380, 360)
 
@@ -71,7 +71,7 @@ class App(QWidget):
     def play_gif(self):
 
         self.start_gif_button.setText("Listening")
-        self.gif = QMovie('../src/giphy.gif')
+        self.gif = QMovie('../assets/giphy.gif')
         self.gif.setSpeed(100)
 
         # Set the GIF animation to the label and start playing
@@ -87,7 +87,7 @@ class App(QWidget):
         self.console_output_text.clear()
 
     def closeEvent(self):
-    #     # Clean up the GIF animation when closing the app
+        #     # Clean up the GIF animation when closing the app
         try:
             self.gif_label.movie().stop()
             self.gif_label.clear()
