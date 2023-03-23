@@ -13,7 +13,6 @@ class App(QWidget):
     def __init__(self):
         super().__init__()
         self.bot = chad_noob_bot()
-
         # Set window properties
         self.window_title = 'noobBot'
         self.setWindowTitle(self.window_title)
@@ -30,7 +29,7 @@ class App(QWidget):
         self.start_gif_button = QPushButton('Speak', self)
         self.start_gif_button.setFont(QFont('Montserrat', 10))
         self.start_gif_button.clicked.connect(self.play_gif)
-        self.text = self.bot.take_command
+
         # Stop button for listening gif
         self.stop_gif_button = QPushButton('Stop', self)
         self.stop_gif_button.clicked.connect(self.stop_gif)
@@ -51,10 +50,7 @@ class App(QWidget):
         layout.addWidget(self.statement_text)
         layout.addWidget(self.console_output_text)
 
-        # bot.wish_me()
-
-    def update_text(self):
-        self.textbox
+        # self.bot.wish_me()
 
     def set_taskbar_icon(self, icon_path):
         # Load the icon from file
@@ -80,14 +76,8 @@ class App(QWidget):
 
         # Set the GIF animation to the label and start playing
         self.gif_label.setMovie(self.gif)
-        play_gif = threading.Thread(target=self.gif.start())
-        play_gif.start()
+        self.gif.start()
         wish_thread = threading.Thread(target=self.bot.wish_me)
-        wish_thread.start()
-        take_command_thread = threading.Thread(target=self.bot.take_command)
-        take_command_thread.start()
-        wish_thread = threading.Thread(
-            target=self.console_output_text.setText(self.bot.wish_me()))
         wish_thread.start()
 
     def stop_gif(self):
@@ -97,7 +87,7 @@ class App(QWidget):
         self.console_output_text.clear()
 
     def closeEvent(self):
-        # Clean up the GIF animation when closing the app
+        #     # Clean up the GIF animation when closing the app
         try:
             self.gif_label.movie().stop()
             self.gif_label.clear()

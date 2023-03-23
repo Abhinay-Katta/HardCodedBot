@@ -13,8 +13,7 @@ class chad_noob_bot:
     def __init__(self) -> None:
         self.engine = pyttsx3.init('sapi5')
         self.voices = self.engine.getProperty('voices')
-        # self.engine.setProperty('voice', self.voices[0].id)
-        self.engine.setProperty('rate', 150)
+        self.engine.setProperty('voice', self.voices[0].id)
         self.commands = {
             "time": lambda: self.__get_time(),
             "youtube": lambda: self.__open_youtube(),
@@ -66,7 +65,7 @@ class chad_noob_bot:
                 return statement
 
     def __get_time(self):
-        return datetime.datetime().now().strftime("%H : %M")
+        return datetime.datetime.now().strftime("%H : %M")
 
     def __shutting_off_with_outro(self) -> None:
         for i in range(5):
