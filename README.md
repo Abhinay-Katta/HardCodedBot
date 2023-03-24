@@ -7,7 +7,7 @@ A voice assistant written in Python and PyQt6 that allows you to perform tasks u
 ## Installation
 1. Clone the repository:
   ```
-  git clone https://github.com/your-username/voice-assistant.git
+  git clone https://github.com/Abhinay-Katta/HardCodedBot
   ```
 2. Install the necessary dependencies by running
  ```
