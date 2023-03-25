@@ -3,7 +3,9 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QVBoxLayout
 from PyQt6.QtGui import QMovie, QIcon, QPixmap, QFont
 import sys
+import os
 import threading
+import logging
 sys.path.append('../')
 sys.path.append('./')
 
@@ -13,6 +15,7 @@ class App(QWidget):
     def __init__(self):
         super().__init__()
         self.bot = chad_noob_bot()
+
         # Set window properties
 
         # gif style properties
@@ -48,8 +51,10 @@ class App(QWidget):
     def window_settings(self):
         window_title = 'noobBot'
         self.setWindowTitle(window_title)
-        self.setWindowIcon(QIcon('../assets/images/noobBot_window_icon.png'))
-        self.set_taskbar_icon('../assets/images/noobBot_window_icon.png')
+        self.setWindowIcon(
+            QIcon(os.path.join('../assets/images', 'noobBot_window_icon.png')))
+        self.set_taskbar_icon(os.path.join(
+            '../assets/images', 'noobBot_window_icon.png'))
         self.setMinimumSize(380, 360)
         self.setMaximumSize(380, 360)
 
@@ -67,35 +72,31 @@ class App(QWidget):
         except:
             pass
 
-        # Create a label to display the GIF animation
-
     def play_gif(self):
 
         self.start_gif_button.setText("Listening")
-        self.gif = QMovie('../assets/gifs/giphy.gif')
+        self.gif = QMovie(os.path.join('../assets/gifs/', 'giphy.gif'))
         self.gif.setSpeed(100)
-
         # Set the GIF animation to the label and start playing
         self.gif_label.setMovie(self.gif)
         self.gif.start()
-        wish_thread = threading.Thread(target=self.bot.greeting)
-        self.console_output_text.setText(self.bot.greeting())
-        wish_thread.start()
+
+        # button spam fix
+        self.bot.greeting()
+        self.console_output_text.setText(self.bot.return_wish)
 
     def stop_gif(self):
-        self.gif.stop()
-        self.gif_label.clear()
         self.start_gif_button.setText("Speak")
+        self.gif_label.clear()
         self.console_output_text.clear()
 
     def closeEvent(self):
         # Clean up the GIF animation when closing the app
-        self.destroy(True)
         try:
             self.gif_label.movie().stop()
             self.gif_label.clear()
-        except:
-            print("Something went wrong!")
+        except Exception as e:
+            print(e)
 
 
 if __name__ == '__main__':

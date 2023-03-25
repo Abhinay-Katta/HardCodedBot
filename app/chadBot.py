@@ -23,29 +23,29 @@ class chad_noob_bot:
         }
 
     def speak(self, text):
+
         def __say(text):
             self.engine.say(text)
             self.engine.runAndWait()
-        speak_thread = threading.Thread(target=__say, args=(text,))
-        speak_thread.start()
+            self.engine.stop()
+        try:
+            speak_thread = threading.Thread(target=__say, args=(text,))
+            speak_thread.start()
+        except Exception as e:
+            print(e)
 
-    def greeting(self):
+    def greeting(self) -> str:
         hour = datetime.datetime.now().hour
-        self.return_wish = ''
         if hour >= 0 and hour < 12:
-            self.speak("Hello, Good Morning")
             self.return_wish = "Hello, Good Morning"
-            # add morning gif here
+            self.speak(self.return_wish)
         elif hour >= 12 and hour < 18:
-            self.speak("Hello, Good Afternoon")
             self.return_wish = "Hello, Good Afternoon"
-
-            # add afternoon gif here
+            self.speak(self.return_wish)
         else:
-            self.speak("Hello, Good Evening")
             self.return_wish = "Hello, Good Evening"
+            self.speak("Hello, Good Evening")
         return self.return_wish
-        # add evening gif here
 
     def take_command(self) -> str:
         r = sr.Recognizer()
@@ -70,7 +70,6 @@ class chad_noob_bot:
             time.sleep(1)
         self.speak('ok your personal assistant is shutting down')
         self.text = 'ok your personal assistant is shutting down'
-
         subprocess.call(["shutdown", "/s"])
 
     def __open_youtube(self):
