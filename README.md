@@ -28,13 +28,11 @@ from the command line:
 python main.py
 ```
 ### Todo:
-[x] Fix the multiple instance error.
-[] Fix the run loop error.
-[] Fix the closeEvent error.
-[] Add take command funtionality.
-[] Add more functionalities.
-[] 
-
+- [x] Fix the multiple instance error.
+- [] Fix the run loop error.
+- [] Fix the closeEvent error.
+- [] Add take command funtionality.
+- [] Add more functionalities.
 ## Contributing
 Contributions are welcome! Please open a pull request with your changes.
 
