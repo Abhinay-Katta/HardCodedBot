@@ -19,8 +19,7 @@ class chad_noob_bot:
             "youtube": lambda: self.__open_youtube(),
             "gmail": lambda: self.__open_gmail(),
             "shut down": lambda: self.__shutting_off_with_outro(),
-            "who are you": lambda: self.__self_describe(),
-
+            "who are you": lambda: self.__self_describe()
         }
 
     def speak(self, text):
@@ -30,7 +29,7 @@ class chad_noob_bot:
         speak_thread = threading.Thread(target=__say, args=(text,))
         speak_thread.start()
 
-    def wish_me(self):
+    def greeting(self):
         hour = datetime.datetime.now().hour
         self.return_wish = ''
         if hour >= 0 and hour < 12:
@@ -50,19 +49,17 @@ class chad_noob_bot:
 
     def take_command(self) -> str:
         r = sr.Recognizer()
-        statement = ''
-        while (statement == None):
-            try:
-                with sr.Microphone() as source:
-                    audio = r.listen(source)
+        try:
+            with sr.Microphone() as source:
+                audio = r.listen(source)
                 statement = r.recognize_google(audio, language='en-in')
                 self.speak(
                     "Yes, the bot seems to be working... Its in the try block of take command now ")
                 print(f"You said:{statement}\n")
-            except:
-                self.speak("Pardon me, can you say that again?...\n")
-            if (statement != None):
-                return statement
+        except Exception as e:
+            self.speak("Pardon me, can you say that again?...\n")
+            print(f"\nException occured in take_command function : {e}\n")
+        return statement
 
     def __get_time(self):
         return datetime.datetime.now().strftime("%H : %M")
@@ -88,21 +85,9 @@ class chad_noob_bot:
 
     def __self_describe(self):
         self.speak(
-            '''I am a noob A I . I am programmed to perform simplest shitty tasks such
-                   as opening youtube or opening g mail and telling you the time. Thats all i can do for now,
-                   but ill be upgraded later in the future, which is pretty doubtfull, to be honest.
-                   I was built by a dude named Abhi, further details about my guy here are confidential for no reason.'''
+            '''I am a noob A I . I am programmed to perform simplest shitty tasks such 
+            as opening youtube or opening g mail and telling you the time. Thats all i can do for now, 
+            but ill be upgraded later in the future, which is pretty doubtfull, to be honest. 
+            I was built by a dude named Abhi, further details about my guy here are confidential for no reason.
+            '''
         )
-    # def run(self):
-
-    #     ins = {
-    #         "time": [lambda:print()), lambda:self.speak(f"the time is {strTime}")],
-    #         "bye": [lambda:self.speak('ok your personal assistant is shutting down'), lambda: print('ok your personal assistant is shutting down')],
-    #         "stop": [lambda:self.speak('ok your personal assistant is shutting down'), lambda: print('ok your personal assistant is shutting down')],
-    #         "open youtube": [lambda:webbrowser.open_new_tab("https://www.youtube.com/"), lambda:self.speak("opening youtube"), lambda:time.sleep(3)],
-    #         "youtube": [lambda:webbrowser.open_new_tab("https://www.youtube.com/"), lambda:self.speak("opening youtube"), lambda: time.sleep(3)],
-    #         "open gmail": [lambda:webbrowser.open_new_tab("https://mail.google.com/"), lambda: self.speak("opening g mail"), lambda: time.sleep(3)],
-    #         "gmail": [lambda:webbrowser.open_new_tab("https://mail.google.com/"), lambda: self.speak("opening g mail"), lambda: time.sleep(3)],
-    #         "what can you do": [lambda:self.speak("I am a noob A I . I am programmed to perform simplest shitty tasks such as opening youtube or opening g mail and telling you the time. Thats all i can do for now, but ill be upgraded later in the future, which is pretty doubtfull, to be honest."),
-    #                             lambda:self.speak("I was built by a dude named Abhi, further details about my guy here are confidential for no reason ")],
-    #         "who are you": [lambda:self.speak("I am a noob A I . I am programmed to perform simplest shitty tasks such as opening youtube or opening g mail and telling you the time

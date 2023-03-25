@@ -25,4 +25,4 @@ To use the voice assistant, run the compiled executable or run the Python script
 Contributions are welcome! Please open a pull request with your changes.
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the MIT License, I think.

@@ -14,12 +14,6 @@ class App(QWidget):
         super().__init__()
         self.bot = chad_noob_bot()
         # Set window properties
-        self.window_title = 'noobBot'
-        self.setWindowTitle(self.window_title)
-        self.setWindowIcon(QIcon('../assets/images/noobBot_window_icon.png'))
-        self.set_taskbar_icon('../assets/images/noobBot_window_icon.png')
-        self.setMinimumSize(380, 360)
-        self.setMaximumSize(380, 360)
 
         # gif style properties
         self.gif_label = QLabel(self)
@@ -49,8 +43,15 @@ class App(QWidget):
         layout.addWidget(self.gif_label)
         layout.addWidget(self.statement_text)
         layout.addWidget(self.console_output_text)
+        self.window_settings()
 
-        # self.bot.wish_me()
+    def window_settings(self):
+        window_title = 'noobBot'
+        self.setWindowTitle(window_title)
+        self.setWindowIcon(QIcon('../assets/images/noobBot_window_icon.png'))
+        self.set_taskbar_icon('../assets/images/noobBot_window_icon.png')
+        self.setMinimumSize(380, 360)
+        self.setMaximumSize(380, 360)
 
     def set_taskbar_icon(self, icon_path):
         # Load the icon from file
@@ -77,22 +78,24 @@ class App(QWidget):
         # Set the GIF animation to the label and start playing
         self.gif_label.setMovie(self.gif)
         self.gif.start()
-        wish_thread = threading.Thread(target=self.bot.wish_me)
+        wish_thread = threading.Thread(target=self.bot.greeting)
+        self.console_output_text.setText(self.bot.greeting())
         wish_thread.start()
 
     def stop_gif(self):
         self.gif.stop()
-        self.start_gif_button.setText("Speak")
         self.gif_label.clear()
+        self.start_gif_button.setText("Speak")
         self.console_output_text.clear()
 
     def closeEvent(self):
-        #     # Clean up the GIF animation when closing the app
+        # Clean up the GIF animation when closing the app
+        self.destroy(True)
         try:
             self.gif_label.movie().stop()
             self.gif_label.clear()
         except:
-            self.gif_label.clear()
+            print("Something went wrong!")
 
 
 if __name__ == '__main__':
