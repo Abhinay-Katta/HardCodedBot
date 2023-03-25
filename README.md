@@ -22,7 +22,18 @@ pyinstaller noobBot.spec
 ```
 
 ## Usage
-To use the voice assistant, run the compiled executable or run the Python script from the command line: python voice_assistant.py. The GUI will open and you can use the voice assistant by clicking on the microphone icon and speaking your command.
+To use the voice assistant, run the compiled executable named ```noobBot.exe``` from ```app/dist/noobBot``` folder or run the Python script
+from the command line: 
+```
+python main.py
+```
+### Todo:
+[x] Fix the multiple instance error.
+[] Fix the run loop error.
+[] Fix the closeEvent error.
+[] Add take command funtionality.
+[] Add more functionalities.
+[] 
 
 ## Contributing
 Contributions are welcome! Please open a pull request with your changes.
