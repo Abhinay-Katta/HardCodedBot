@@ -1,1 +1,1 @@
-pyinstaller main.py --name noobBot --noconsole --add-data "giphy.gif;." --add-data "noobBot_window_icon.png;."
+pyinstaller main.py --name noobBot --noconsole --add-data "./assets/gifs/giphy.gif;assets/gifs/" --add-data "./assets/images/noobBot_window_icon.png;assets/images/"
