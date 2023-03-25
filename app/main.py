@@ -50,9 +50,9 @@ class App(QWidget):
         window_title = 'noobBot'
         self.setWindowTitle(window_title)
         self.setWindowIcon(
-            QIcon(os.path.join('../assets/images', 'noobBot_window_icon.png')))
+            QIcon(os.path.join('./assets/images/', 'noobBot_window_icon.png')))
         self.set_taskbar_icon(os.path.join(
-            '../assets/images', 'noobBot_window_icon.png'))
+            './assets/images/', 'noobBot_window_icon.png'))
         self.setMinimumSize(380, 360)
         self.setMaximumSize(380, 360)
 
@@ -73,7 +73,7 @@ class App(QWidget):
     def play_gif(self):
 
         self.start_gif_button.setText("Listening")
-        self.gif = QMovie(os.path.join('../assets/gifs/', 'giphy.gif'))
+        self.gif = QMovie(os.path.join('./assets/gifs/', 'giphy.gif'))
         self.gif.setSpeed(100)
         # Set the GIF animation to the label and start playing
         self.gif_label.setMovie(self.gif)
