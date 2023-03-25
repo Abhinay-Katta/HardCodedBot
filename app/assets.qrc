@@ -1,7 +1,0 @@
-# Create a resource file called assets.qrc
-<RCC>
-    <qresource prefix="/assets">
-        <file>images/noobBot_window_icon.png</file>
-        <file>gifs/giphy.gif</file>
-    </qresource>
-</RCC>
