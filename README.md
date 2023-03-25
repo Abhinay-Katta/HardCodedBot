@@ -15,6 +15,11 @@ A voice assistant written in Python and PyQt6 that allows you to perform tasks u
  ```
 3. Compile the application using PyInstaller:
  ``` run the install.sh file```
+4. Edit the ```.spec``` file according to your wish.
+5. Run the command to build from the ```.spec``` file :
+```
+pyinstaller noobBot.spec
+```
 
 ## Usage
 To use the voice assistant, run the compiled executable or run the Python script from the command line: python voice_assistant.py. The GUI will open and you can use the voice assistant by clicking on the microphone icon and speaking your command.
