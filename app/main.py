@@ -1,6 +1,8 @@
 from chadBot import chad_noob_bot
 from PyQt6.QtCore import Qt
+import threading
 from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QVBoxLayout
+from PyQt6 import QtGui
 from PyQt6.QtGui import QMovie, QIcon, QPixmap, QFont
 import sys
 import os
@@ -27,22 +29,27 @@ class App(QWidget):
 
         # Stop button for listening gif
         self.stop_gif_button = QPushButton('Stop', self)
-        self.stop_gif_button.clicked.connect(self.stop_gif)
         self.stop_gif_button.setFont(QFont('Montserrat', 10))
+        self.stop_gif_button.clicked.connect(self.stop_gif)
 
+        # System shut dowm button
+        self.shut_down_button = QPushButton("Shut Down PC", self)
+        self.shut_down_button.setFont(QFont('Montserrat', 10))
+        self.shut_down_button.clicked.connect(self.shut_down_pc)
         # print console output
         self.console_output_text = QLabel(self)
 
         # print Statement
-        self.statement_text = QLabel(self)
-        self.statement_text.setText("statement text")
+        # self.statement_text = QLabel(self)
+        # self.statement_text.setText("statement text")
 
         # Create a vertical layout and add the button and label to it
         layout = QVBoxLayout(self)
         layout.addWidget(self.start_gif_button)
         layout.addWidget(self.stop_gif_button)
+        layout.addWidget(self.shut_down_button)
         layout.addWidget(self.gif_label)
-        layout.addWidget(self.statement_text)
+        # layout.addWidget(self.statement_text)
         layout.addWidget(self.console_output_text)
         self.window_settings()
 
@@ -72,21 +79,30 @@ class App(QWidget):
 
     def play_gif(self):
 
+        # Set the GIF animation to the label and start playing
         self.start_gif_button.setText("Listening")
         self.gif = QMovie(os.path.join('./assets/gifs/', 'giphy.gif'))
         self.gif.setSpeed(100)
-        # Set the GIF animation to the label and start playing
         self.gif_label.setMovie(self.gif)
         self.gif.start()
 
         # button spam fix
         self.bot.greeting()
-        self.console_output_text.setText(self.bot.return_wish)
+        self.console_output_text.setText(self.bot.return_greet)
 
     def stop_gif(self):
         self.start_gif_button.setText("Speak")
         self.gif_label.clear()
         self.console_output_text.clear()
+
+    def shut_down_pc(self):
+        self.gif = QMovie(os.path.join('./assets/gifs/', 'shut_down_gif.gif'))
+        self.gif.setSpeed(200)
+        self.gif_label.setMovie(self.gif)
+        self.gif.start()
+        self.console_output_text.setText(
+            "Okay, your system will shut down in 5 seconds. Have a nice day.")
+        self.bot.save_and_shut_down()
 
 
 if __name__ == '__main__':
