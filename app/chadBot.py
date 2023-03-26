@@ -82,8 +82,8 @@ class chad_noob_bot:
 
         shut_down_warning = "Okay, your system is shutting down. Have a nice day."
         self.speak(shut_down_warning)
-        # pag.hotkey('alt', 'f4')
-        # os.system("shutdown /s /t 5")
+        pag.hotkey('alt', 'f4')
+        os.system("shutdown /s /t 5")
 
     def open_youtube(self):
         webbrowser.open_new_tab("https://www.youtube.com/")
