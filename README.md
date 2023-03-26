@@ -29,8 +29,8 @@ python main.py
 ```
 ### Todo:
 - [x] Fix the multiple instance error.
-- [ ] Fix the run loop error.
-- [ ] Fix the closeEvent error.
+- [x] Fix the run loop error.
+- [x] Fix the closeEvent error.
 - [ ] Add take command funtionality.
 - [ ] Add more functionalities.
 ## Contributing

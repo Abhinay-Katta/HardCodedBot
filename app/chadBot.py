@@ -69,8 +69,9 @@ class chad_noob_bot:
             print(f"Destroying SYSTEM32 in {6-i} seconds..\n")
             time.sleep(1)
         self.speak('ok your personal assistant is shutting down')
-        self.text = 'ok your personal assistant is shutting down'
+        self.output_message = 'Ok your personal assistant is shutting down'
         subprocess.call(["shutdown", "/s"])
+        return self.output_message
 
     def __open_youtube(self):
         webbrowser.open_new_tab("https://www.youtube.com/")

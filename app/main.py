@@ -88,14 +88,6 @@ class App(QWidget):
         self.gif_label.clear()
         self.console_output_text.clear()
 
-    def closeEvent(self):
-        # Clean up the GIF animation when closing the app
-        try:
-            self.gif_label.movie().stop()
-            self.gif_label.clear()
-        except Exception as e:
-            print(e)
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
