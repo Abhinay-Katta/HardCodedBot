@@ -69,6 +69,7 @@ class chad_noob_bot:
         pag.hotkey('ctrl', 'shift', 'a')
         pag.hotkey('ctrl', 'shift', 's')
         pag.hotkey('ctrl', 'shift', '`')
+        time.sleep(2)
         pag.typewrite('git add .')
         pag.press("enter")
         time.sleep(1)
@@ -77,10 +78,11 @@ class chad_noob_bot:
         time.sleep(3)
         pag.typewrite('git push')
         pag.press("enter")
+        time.sleep(1)
 
         shut_down_warning = "Okay, your system is shutting down. Have a nice day."
         self.speak(shut_down_warning)
-        pag.hotkey('alt', 'f4')
+        # pag.hotkey('alt', 'f4')
         # os.system("shutdown /s /t 5")
 
     def open_youtube(self):
