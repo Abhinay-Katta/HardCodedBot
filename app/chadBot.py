@@ -78,7 +78,7 @@ class chad_noob_bot:
         time.sleep(3)
         pag.typewrite('git push')
         pag.press("enter")
-        time.sleep(1)
+        time.sleep(5)
 
         shut_down_warning = "Okay, your system is shutting down. Have a nice day."
         self.speak(shut_down_warning)
