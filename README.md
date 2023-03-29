@@ -13,7 +13,7 @@ A voice assistant written in Python and PyQt6 that allows you to perform tasks u
  ```
  pip install -r requirements.txt
  ```
-3. Compile the application using PyInstaller:
+3. Compile the application using PyInstaller in app folder:
  ``` run the install.sh file```
 4. Edit the ```.spec``` file according to your wish.
 5. Run the command to build from the ```.spec``` file :
