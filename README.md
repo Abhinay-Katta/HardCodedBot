@@ -1,5 +1,5 @@
 # HardCodedBot
-### Previously called as NoobBot
+<sub> Previously called as NoobBot</sub>
 ### Made using PyQt6 and app compiled with Pyinstaller
  
 A voice assistant written in Python and PyQt6 that allows you to perform tasks using voice commands. The application initially started as a simple Python script and later a GUI was added with PyQt6. The application can be compiled using PyInstaller and it plays a GIF while assisting you with voice commands. More commands will be added in the future and development is still in progress.
