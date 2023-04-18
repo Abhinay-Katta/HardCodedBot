@@ -1,8 +1,6 @@
 from chadBot import chad_noob_bot
 from PyQt6.QtCore import Qt
-import threading
 from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QVBoxLayout
-from PyQt6 import QtGui
 from PyQt6.QtGui import QMovie, QIcon, QPixmap, QFont
 import sys
 import os
