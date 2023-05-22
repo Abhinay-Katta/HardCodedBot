@@ -13,66 +13,50 @@ class chad_noob_bot:
         self.voices = self.engine.getProperty('voices')
         self.engine.setProperty('voice', self.voices[0].id)
         self.commands = {
-            "time": lambda: self.get_time(),
+            "time":  self.get_time(),
             "youtube": lambda: self.open_youtube(),
             "gmail": lambda: self.open_gmail(),
-            # "shut down": lambda: self.shutting_off_with_outro(),
             "who are you": lambda: self.self_describe()
         }
 
     def speak(self, text):
 
-        def __say(text):
-            self.engine.say(text)
-            self.engine.runAndWait()
-            self.engine.stop()
-        try:
-            speak_thread = threading.Thread(target=__say, args=(text,))
-            speak_thread.start()
-        except Exception as e:
-            print(e)
+        # def __say(text):
+        self.engine.say(text)
+        self.engine.runAndWait()
+        self.engine.stop()
+        # try:
+        #     speak_thread = threading.Thread(target=__say, args=(text,))
+        #     speak_thread.start()
+        # except Exception as e:
+        #     print(e)
 
     def greeting(self) -> str:
         hour = datetime.datetime.now().hour
         if hour >= 0 and hour < 12:
             self.return_greet = "Hello, Good Morning"
-            self.speak(self.return_greet)
         elif hour >= 12 and hour < 18:
             self.return_greet = "Hello, Good Afternoon"
-            self.speak(self.return_greet)
         else:
             self.return_greet = "Hello, Good Evening"
-            self.speak(self.return_greet)
+        self.speak(self.return_greet)
         return self.return_greet
 
     def take_command(self) -> str:
-        r = sr.Recognizer()
-
-        def __taking_command(r):
-            try:
-                with sr.Microphone() as source:
-                    audio = r.listen(source)
-                    self.statement = r.recognize_google(
-                        audio, language='en-in')
-                    self.speak(
-                        "Yes, the bot seems to be working... It's in the try block of take command now")
-                    print(f"You said: {self.statement}\n")
-            except sr.UnknownValueError:
-                self.speak(
-                    "Sorry, I didn't catch that. Can you please repeat?")
-            except sr.RequestError:
-                self.speak(
-                    "Sorry, I'm having trouble accessing the speech recognition service.")
-                return self.statement
         try:
-            command_thread = threading.Thread(
-                target=__taking_command, args=(r,))
-            return command_thread.start()
+            r = sr.Recognizer()
+            with sr.Microphone() as source:
+                audio = r.listen(source)
+                self.statement = r.recognize_google(
+                    audio, language='en-in')
+                print(f"You said: {self.statement}\n")
+                self.commands[str(self.statement)]
         except Exception as e:
-            print(f"\nException occured in take_command function : {e}\n")
+            print(f"\n Exception occured in take_command{e}\n")
+        return self.statement
 
     def get_time(self):
-        return datetime.datetime.now().strftime("%H : %M")
+        return self.speak(datetime.datetime.now().strftime("%H : %M"))
 
     def open_youtube(self):
         webbrowser.open_new_tab("https://www.youtube.com/")
@@ -91,3 +75,10 @@ class chad_noob_bot:
             but ill be upgraded later in the future, which is pretty doubtfull, to be honest.
             I was built by a dude named Abhi, further details about my guy here are confidential for no reason.
             ''')
+
+
+bot = chad_noob_bot()
+bot.greeting()
+print(bot.take_command())
+# bot.get_time()
+# bot.o()

@@ -8,12 +8,12 @@ sys.path.append('../')
 sys.path.append('./')
 
 
-class App(QWidget, chad_noob_bot):
+class App(QWidget):
 
     def __init__(self):
         super().__init__()
         self.bot = chad_noob_bot()
-        self.this_commands = self.commands
+
         # Set window properties
 
         # gif style properties
@@ -81,8 +81,6 @@ class App(QWidget, chad_noob_bot):
         # button spam fix
         self.bot.greeting()
         self.console_output_text.setText(self.bot.return_greet)
-        # command = self.take_command()
-        # self.commands[command]
 
     def stop_gif(self):
         self.start_gif_button.setText("Speak")
