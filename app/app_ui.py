@@ -1,20 +1,18 @@
-from chadBot import chad_noob_bot
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QVBoxLayout
 from PyQt6.QtGui import QMovie, QIcon, QPixmap, QFont
 import sys
 import os
+# from chadBot import chatbot
 sys.path.append('../')
 sys.path.append('./')
 
 
-class App(QWidget, chad_noob_bot):
+class App(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.bot = chad_noob_bot()
-        self.this_commands = self.commands
-        # Set window properties
+        # self.bot = chad_noob_bot()
 
         # gif style properties
         self.gif_label = QLabel(self)
@@ -25,21 +23,16 @@ class App(QWidget, chad_noob_bot):
         self.start_gif_button.setFont(QFont('Montserrat', 10))
         self.start_gif_button.clicked.connect(self.play_gif)
 
-        # Stop button for listening gif
-        self.stop_gif_button = QPushButton('Stop', self)
-        self.stop_gif_button.setFont(QFont('Montserrat', 10))
-        self.stop_gif_button.clicked.connect(self.stop_gif)
-
         # print console output
         self.console_output_text = QLabel(self)
-
+        self.console_output_text.setText(" ")
         # print Statement
         self.statement_text = QLabel(self)
+        self.statement_text.setText("statement text")
 
         # Create a vertical layout and add the button and label to it
         layout = QVBoxLayout(self)
         layout.addWidget(self.start_gif_button)
-        layout.addWidget(self.stop_gif_button)
         layout.addWidget(self.gif_label)
         layout.addWidget(self.statement_text)
         layout.addWidget(self.console_output_text)
@@ -80,27 +73,9 @@ class App(QWidget, chad_noob_bot):
 
         # button spam fix
         self.bot.greeting()
-        self.console_output_text.setText(self.bot.return_greet)
-        # command = self.take_command()
-        # self.commands[command]
+        self.console_output
 
     def stop_gif(self):
         self.start_gif_button.setText("Speak")
         self.gif_label.clear()
         self.console_output_text.clear()
-
-    def shut_down_pc(self):
-        self.gif = QMovie(os.path.join('./assets/gifs/', 'shut_down_gif.gif'))
-        self.gif.setSpeed(200)
-        self.gif_label.setMovie(self.gif)
-        self.gif.start()
-        self.console_output_text.setText(
-            "Okay, your system will shut down in 5 seconds. Have a nice day.")
-        self.bot.save_and_shut_down()
-
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = App()
-    ex.show()
-    sys.exit(app.exec())

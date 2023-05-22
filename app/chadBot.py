@@ -4,9 +4,7 @@ import pyttsx3.engine
 import webbrowser
 import time
 import datetime
-import os
 import threading
-import pyautogui as pag
 
 
 class chad_noob_bot:
@@ -49,17 +47,29 @@ class chad_noob_bot:
 
     def take_command(self) -> str:
         r = sr.Recognizer()
-        try:
-            with sr.Microphone() as source:
-                audio = r.listen(source)
-                statement = r.recognize_google(audio, language='en-in')
+
+        def __taking_command(r):
+            try:
+                with sr.Microphone() as source:
+                    audio = r.listen(source)
+                    self.statement = r.recognize_google(
+                        audio, language='en-in')
+                    self.speak(
+                        "Yes, the bot seems to be working... It's in the try block of take command now")
+                    print(f"You said: {self.statement}\n")
+            except sr.UnknownValueError:
                 self.speak(
-                    "Yes, the bot seems to be working... Its in the try block of take command now ")
-                print(f"You said:{statement}\n")
+                    "Sorry, I didn't catch that. Can you please repeat?")
+            except sr.RequestError:
+                self.speak(
+                    "Sorry, I'm having trouble accessing the speech recognition service.")
+                return self.statement
+        try:
+            command_thread = threading.Thread(
+                target=__taking_command, args=(r,))
+            return command_thread.start()
         except Exception as e:
-            self.speak("Pardon me, can you say that again?...\n")
             print(f"\nException occured in take_command function : {e}\n")
-        return statement
 
     def get_time(self):
         return datetime.datetime.now().strftime("%H : %M")
