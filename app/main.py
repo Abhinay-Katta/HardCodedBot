@@ -4,6 +4,7 @@ from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QVBoxLay
 from PyQt6.QtGui import QMovie, QIcon, QPixmap, QFont
 import sys
 import os
+import threading
 sys.path.append('../')
 sys.path.append('./')
 
@@ -37,7 +38,7 @@ class App(QWidget):
 
         # Create a vertical layout and add the button and label to it
         layout = QVBoxLayout(self)
-        layout.addWidget(self.start_gif_button)
+        layout.addWidget(self.start_button)
         layout.addWidget(self.stop_gif_button)
         layout.addWidget(self.gif_label)
         layout.addWidget(self.statement_text)
@@ -46,7 +47,7 @@ class App(QWidget):
 
     def play_gif(self):
         # Set the GIF animation to the label and start playing
-        self.start_gif_button.setText("Listening")
+        self.start_button.setText("Listening")
         self.gif = QMovie(os.path.join('./assets/gifs/', 'giphy.gif'))
         self.gif.setSpeed(100)
         self.gif_label.setMovie(self.gif)
@@ -57,7 +58,7 @@ class App(QWidget):
         self.console_output_text.setText(self.bot.return_greet)
 
     def stop_gif(self):
-        self.start_gif_button.setText("Speak")
+        self.start_button.setText("Speak")
         self.gif_label.clear()
         self.console_output_text.clear()
 

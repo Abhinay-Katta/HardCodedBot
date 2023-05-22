@@ -42,19 +42,24 @@ class chad_noob_bot:
         return self.return_greet
 
     def take_command(self):
-        try:
-            r = sr.Recognizer()
-            with sr.Microphone() as source:
-                audio = r.listen(source)
+        def tc(self):
+            while True:
+                try:
+                    r = sr.Recognizer()
+                    with sr.Microphone() as source:
+                        audio = r.listen(source)
 
-                self.statement = r.recognize_google(
-                    audio, language='en-in')
-                print(f"You said: {self.statement}\n")
-                self.commands[str(self.statement)]()
-                return self.statement
-        except Exception:
-            print("Give a statement")
-            self.open_youtube()
+                        self.statement = r.recognize_google(
+                            audio, language='en-in')
+                        print(f"You said: {self.statement}\n")
+                        self.commands[str(self.statement)]()
+
+                        if self.statement == 'exit':
+                            return self.statement
+                except Exception:
+                    print("Give a statement")
+        take_command_thread = threading.Thread(target=tc, args=(self,))
+        take_command_thread.start()
 
     def get_time(self):
         self.speak(datetime.datetime.now().strftime("%H : %M"))
