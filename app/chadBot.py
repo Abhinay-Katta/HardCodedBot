@@ -15,11 +15,11 @@ class chad_noob_bot:
         self.voices = self.engine.getProperty('voices')
         self.engine.setProperty('voice', self.voices[0].id)
         self.commands = {
-            "time": lambda: self. get_time(),
-            "youtube": lambda: self. open_youtube(),
-            "gmail": lambda: self. open_gmail(),
-            "shut down": lambda: self. shutting_off_with_outro(),
-            "who are you": lambda: self. self_describe()
+            "time": lambda: self.get_time(),
+            "youtube": lambda: self.open_youtube(),
+            "gmail": lambda: self.open_gmail(),
+            # "shut down": lambda: self.shutting_off_with_outro(),
+            "who are you": lambda: self.self_describe()
         }
 
     def speak(self, text):
@@ -64,26 +64,6 @@ class chad_noob_bot:
     def get_time(self):
         return datetime.datetime.now().strftime("%H : %M")
 
-    def save_and_shut_down(self):
-        pag.hotkey('alt', 'tab')
-        pag.hotkey('ctrl', 'shift', 'a')
-        pag.hotkey('ctrl', 'shift', 's')
-        pag.hotkey('ctrl', 'shift', '`')
-        time.sleep(2)
-        pag.typewrite('git add .')
-        pag.press("enter")
-        time.sleep(1)
-        pag.typewrite('git commit -m "autosave"')
-        pag.press("enter")
-        time.sleep(3)
-        pag.typewrite('git push')
-        pag.press("enter")
-        time.sleep(5)
-
-        shut_down_warning = "Okay, your system is shutting down. Have a nice day."
-        self.speak(shut_down_warning)
-        os.system("shutdown /s /t 5")
-
     def open_youtube(self):
         webbrowser.open_new_tab("https://www.youtube.com/")
         self.speak("opening youtube")
@@ -96,8 +76,8 @@ class chad_noob_bot:
 
     def self_describe(self):
         self.speak(
-            '''I am a noob A I . I am programmed to perform simplest shitty tasks such 
-            as opening youtube or opening g mail and telling you the time. Thats all i can do for now, 
-            but ill be upgraded later in the future, which is pretty doubtfull, to be honest. 
+            '''I am a noob A I . I am programmed to perform simplest shitty tasks such
+            as opening youtube or opening g mail and telling you the time. Thats all i can do for now,
+            but ill be upgraded later in the future, which is pretty doubtfull, to be honest.
             I was built by a dude named Abhi, further details about my guy here are confidential for no reason.
             ''')
