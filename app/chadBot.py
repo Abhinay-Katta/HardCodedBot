@@ -13,23 +13,22 @@ class chad_noob_bot:
         self.voices = self.engine.getProperty('voices')
         self.engine.setProperty('voice', self.voices[0].id)
         self.commands = {
-            "time":  self.get_time(),
+            "time": lambda: self.get_time(),
             "youtube": lambda: self.open_youtube(),
             "gmail": lambda: self.open_gmail(),
             "who are you": lambda: self.self_describe()
         }
 
     def speak(self, text):
-
-        # def __say(text):
-        self.engine.say(text)
-        self.engine.runAndWait()
-        self.engine.stop()
-        # try:
-        #     speak_thread = threading.Thread(target=__say, args=(text,))
-        #     speak_thread.start()
-        # except Exception as e:
-        #     print(e)
+        def __say(text):
+            self.engine.say(text)
+            self.engine.runAndWait()
+            self.engine.stop()
+        try:
+            speak_thread = threading.Thread(target=__say, args=(text,))
+            speak_thread.start()
+        except Exception as e:
+            print(e)
 
     def greeting(self) -> str:
         hour = datetime.datetime.now().hour
@@ -42,21 +41,23 @@ class chad_noob_bot:
         self.speak(self.return_greet)
         return self.return_greet
 
-    def take_command(self) -> str:
+    def take_command(self):
         try:
             r = sr.Recognizer()
             with sr.Microphone() as source:
                 audio = r.listen(source)
+
                 self.statement = r.recognize_google(
                     audio, language='en-in')
                 print(f"You said: {self.statement}\n")
-                self.commands[str(self.statement)]
-        except Exception as e:
-            print(f"\n Exception occured in take_command{e}\n")
-        return self.statement
+                self.commands[str(self.statement)]()
+                return self.statement
+        except Exception:
+            print("Give a statement")
+            self.open_youtube()
 
     def get_time(self):
-        return self.speak(datetime.datetime.now().strftime("%H : %M"))
+        self.speak(datetime.datetime.now().strftime("%H : %M"))
 
     def open_youtube(self):
         webbrowser.open_new_tab("https://www.youtube.com/")
@@ -69,16 +70,9 @@ class chad_noob_bot:
         time.sleep(3)
 
     def self_describe(self):
-        self.speak(
+        return self.speak(
             '''I am a noob A I . I am programmed to perform simplest shitty tasks such
             as opening youtube or opening g mail and telling you the time. Thats all i can do for now,
             but ill be upgraded later in the future, which is pretty doubtfull, to be honest.
             I was built by a dude named Abhi, further details about my guy here are confidential for no reason.
             ''')
-
-
-bot = chad_noob_bot()
-bot.greeting()
-print(bot.take_command())
-# bot.get_time()
-# bot.o()
