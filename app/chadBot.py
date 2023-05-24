@@ -5,6 +5,8 @@ import webbrowser
 import time
 import datetime
 import threading
+# TODO:
+# 1. Re-Write whole app
 
 
 class chad_noob_bot:
