@@ -22,8 +22,8 @@ class App(QWidget):
         # Start button for listening gif
         self.start_button = QPushButton('Speak', self)
         self.start_button.setFont(QFont('Montserrat', 10))
-        self.start_button.clicked.connect(self.play_gif)
-        self.start_button.clicked.connect(self.bot.take_command)
+        self.start_button.clicked.connect(self.start_bot)
+        # self.start_button.clicked.connect(self.bot.take_command)
 
         # Stop button for listening gif
         self.stop_gif_button = QPushButton('Stop', self)
@@ -45,17 +45,19 @@ class App(QWidget):
         layout.addWidget(self.console_output_text)
         self.window_settings()
 
-    def play_gif(self):
+    def start_bot(self):
         # Set the GIF animation to the label and start playing
         self.start_button.setText("Listening")
+        self.bot.greeting()
+        self.console_output_text.setText(self.bot.return_greet)
+        self.bot.take_command()
+
         self.gif = QMovie(os.path.join('./assets/gifs/', 'giphy.gif'))
         self.gif.setSpeed(100)
         self.gif_label.setMovie(self.gif)
         self.gif.start()
 
         # button spam fix
-        self.bot.greeting()
-        self.console_output_text.setText(self.bot.return_greet)
 
     def stop_gif(self):
         self.start_button.setText("Speak")

@@ -48,18 +48,18 @@ class chad_noob_bot:
             try:
                 r = sr.Recognizer()
                 with sr.Microphone() as source:
-                    while True:
-                        audio = r.listen(source)
-                        print('Speak now: ')
-                        self.statement = r.recognize_google(
-                            audio, language='en-in')
-                        print(f"You said: {self.statement}\n")
-                        self.commands[str(self.statement)]()
-                        if self.statement == 'exit':
-                            return self.statement
+                    audio = r.listen(source)
+                    print('Speak now: ')
+                    self.statement = r.recognize_google(
+                        audio, language='en-in')
+                    print(f"You said: {self.statement}\n")
+                    self.commands[str(self.statement)]()
+                    if self.statement == 'exit':
+                        return self.statement
 
-            except Exception:
-                print("Give a statement")
+            except Exception as e:
+                print(e)
+
         take_command_thread = threading.Thread(target=tc, args=(self,))
         take_command_thread.start()
 
